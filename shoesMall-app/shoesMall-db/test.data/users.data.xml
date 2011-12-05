@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+	<preConditions>
+		<dbms type="postgresql" />
+	</preConditions>
+	<property name="table.name" value="USERS" />
+	<changeSet id="1" author="qh">
+		<sql>
+			insert into ${table.name} (id, name, email, password, status) values (1, 'admin', 'admin@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+            insert into ${table.name} (id, name, email, password, status) values (2, 'operator', 'operator@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+            insert into ${table.name} (id, name, email, password, status) values (3, 'server', 'server@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (4, 'cooperator', 'cooperator@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (5, 'test', 'test@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (6, 'user1', 'user1@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (7, 'user2', 'user2@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (8, 'user3', 'user3@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (9, 'user4', 'user4@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+			insert into ${table.name} (id, name, email, password, status) values (10, 'user5', 'user5@cocos2d-x.org', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', 1);
+		</sql>
+	</changeSet>
+</databaseChangeLog>
