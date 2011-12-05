@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite
+        PUBLIC "-//.tuckey.org//DTD UrlRewrite 3.2//EN"
+        "urlrewrite3.2.dtd">
+
+<urlrewrite default-match-type="wildcard">
+    <rule>
+        <from>/upload/**</from>
+        <to>/static/upload/$1</to>
+    </rule>
+
+    <outbound-rule>
+        <from>/static/script/*</from>
+        <to>/script/$1</to>
+    </outbound-rule>
+</urlrewrite>

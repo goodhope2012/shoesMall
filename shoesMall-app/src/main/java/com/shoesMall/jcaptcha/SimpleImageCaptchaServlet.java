@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.octo.captcha.service.CaptchaServiceException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class SimpleImageCaptchaServlet extends HttpServlet {
 	private static final long serialVersionUID = -9025573559354648634L;
@@ -27,9 +27,9 @@ public class SimpleImageCaptchaServlet extends HttpServlet {
 		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 		try {
 			String captchaId = httpServletRequest.getSession().getId();
-			BufferedImage challenge = CaptchaServiceSingleton.getInstance().getImageChallengeForID(captchaId, httpServletRequest.getLocale());
-			JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
-			jpegEncoder.encode(challenge);
+//			BufferedImage challenge = CaptchaServiceSingleton.getInstance().getImageChallengeForID(captchaId, httpServletRequest.getLocale());
+//			JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
+//			jpegEncoder.encode(challenge);
 		} catch (IllegalArgumentException e) {
 			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;

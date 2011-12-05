@@ -6,9 +6,12 @@
 	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
 		<property name="alias" value="DBPool" />
 		<property name="driver" value="org.postgresql.Driver" />
-		<property name="driverUrl" value="jdbc:postgresql://127.0.0.1:5432/shoes_mall?useUnicode=true&amp;characterEncoding=utf8" />
-		<property name="user" value="whb" />
-		<property name="password" value="whb" />
+		<property name="driverUrl" value="jdbc:postgresql://221.123.162.134:5432/share-x?useUnicode=true&amp;characterEncoding=utf8" />
+		<property name="user" value="cocos" />
+		<property name="password" value="share.cocos2d-x.org" />
+<!-- 		<property name="driverUrl" value="jdbc:postgresql://localhost:5432/ispeed?useUnicode=true&amp;characterEncoding=utf8" /> -->
+<!-- 		<property name="user" value="cqh" /> -->
+<!-- 		<property name="password" value="cqh" /> -->
 		<property name="maximumConnectionCount" value="20" />
 		<property name="minimumConnectionCount" value="10" />
 		<property name="prototypeCount" value="10" />

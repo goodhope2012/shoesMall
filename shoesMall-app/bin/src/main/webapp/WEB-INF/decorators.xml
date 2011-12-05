@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/WEB-INF/freemarker">
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+	<excludes>
+		<pattern>/images/*</pattern>
+		<pattern>/css/*</pattern>
+		<pattern>/js/*</pattern>
+		<pattern>/script/*</pattern>
+		<pattern>*/ajax</pattern>
+	</excludes>
+	<decorator name="bo_decorator" page="decorators/backoffice_decorator.ftl">
+		<pattern>/backoffice*</pattern>
+	</decorator>
+	<decorator name="common_decorator" page="decorators/common_decorator.ftl">
+		<pattern>/*</pattern>
+	</decorator>
+</decorators>

@@ -7,26 +7,26 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/" />
 			<mvc:mapping path="/**" />
-			<bean class="com.shoesMall.interceptor.AuditTrailInterceptor" />
+			<bean class="com.cocos.share.interceptor.AuditTrailInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/" />
 			<mvc:mapping path="/**" />
-			<bean class="com.shoesMall.interceptor.AbsolutelyPathInterceptor" />
+			<bean class="com.cocos.share.interceptor.AbsolutelyPathInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/" />
 			<mvc:mapping path="/**" />
-			<bean class="com.shoesMall.interceptor.PrincipalAwareInterceptor" />
+			<bean class="com.cocos.share.interceptor.PrincipalAwareInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/" />
 			<mvc:mapping path="/**" />
-			<bean class="com.shoesMall.interceptor.DuplicateFormSubmissionInterceptor" />
+			<bean class="com.cocos.share.interceptor.DuplicateFormSubmissionInterceptor" />
 		</mvc:interceptor>
-		<!-- mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/cas/register/add" />
-			<bean class="com.shoesMall.interceptor.JcaptchaVerifyInterceptor" />
-		</mvc:interceptor-->
+			<bean class="com.cocos.share.interceptor.JcaptchaVerifyInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
