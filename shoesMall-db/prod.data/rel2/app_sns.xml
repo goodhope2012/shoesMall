@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+	<preConditions>
+		<dbms type="postgresql" />
+	</preConditions>
+	<property name="table.name" value="APP_SNS" />
+	<changeSet id="create.sequence" author="qh">
+		<createSequence sequenceName="SEQ_APP_SNS" startValue="10000" />
+	</changeSet>
+	<changeSet id="create.table" author="qh">
+		<createTable tableName="${table.name}">
+			<column name="ID" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="APP_ID" type="bigint" />
+			<column name="SNS_ID" type="bigint" />
+			<column name="SNS_ACCOUNT" type="VARCHAR(256)" />
+			<column name="SNS_KEY" type="VARCHAR(2048)" />
+			<column name="SNS_SECRET" type="VARCHAR(2048)" />
+			<column name="TEMPLET" type="VARCHAR(2048)" />
+			<column name="CREATED_DATE" type="DATETIME" />
+		</createTable>
+		<addForeignKeyConstraint constraintName="APP_SNS_APP_FK" baseTableName="${table.name}" baseColumnNames="APP_ID" referencedTableName="APP" referencedColumnNames="ID" />
+		<addForeignKeyConstraint constraintName="APP_SNS_SNS_FK" baseTableName="${table.name}" baseColumnNames="SNS_ID" referencedTableName="SNS" referencedColumnNames="ID" />
+	</changeSet>
+</databaseChangeLog>

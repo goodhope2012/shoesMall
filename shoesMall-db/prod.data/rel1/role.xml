@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+	<preConditions>
+		<dbms type="postgresql" />
+	</preConditions>
+	<property name="table.name" value="ROLE" />
+	<changeSet id="create.sequence" author="qh">
+		<createSequence sequenceName="SEQ_ROLE" startValue="10000" />
+	</changeSet>
+	<changeSet id="create.table" author="qh">
+		<createTable tableName="${table.name}">
+			<column name="ID" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="ROLE" type="VARCHAR(64)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

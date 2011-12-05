@@ -1,0 +1,89 @@
+#slides_2, #slides_3 {
+	z-index:100;
+}
+
+/*
+	Slides container
+	Important:
+	Set the width of your slides container
+	If height not specified height will be set by the slide content
+	Set to display none, prevents content flash
+*/
+.slides_container {
+	height:100%;
+	overflow:hidden;
+	position:relative;
+	display:none;
+	margin:4px 12px;
+}
+
+/*
+	Each slide
+	Important:
+	Set the width of your slides
+	Offeset for the 20px of padding
+	If height not specified height will be set by the slide content
+	Set to display block
+*/
+
+#slides_2 .slide, #slides_3 .slide {
+	width:100%;
+	height:190px;
+	display:block;
+}
+
+/*
+	Next/prev buttons
+*/
+#slides_2 .next,#slides_2 .prev, #slides_3 .next,#slides_3 .prev {
+	position:absolute;
+	top:107px;
+	left:-39px;
+	width:24px;
+	height:43px;
+	display:block;
+	z-index:101;
+}
+
+#slides_2 .next #slides_3 .next {
+	left:585px;
+}
+
+/*
+	Pagination
+*/
+
+.pagination {
+	float:right;
+	margin:5px;
+	width:80px;
+	height: 30px;
+}
+
+.pagination li {
+	float:left;
+	margin:10px 1px;
+	list-style:none;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	height:0;
+	padding-top:12px;
+	background-image:url(pagination.png);
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -12px;
+}
+
+.index_pc .links {
+	color: orange;
+	display:block;
+	margin-top:10px;
+	font-weight:800;
+}

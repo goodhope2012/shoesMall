@@ -1,0 +1,108 @@
+<project name="dbmigration.share" basedir="." default="1.about">
+	<property file="${basedir}/build.properties" />
+	<property name="report.dir" value="${basedir}/report" />
+	<property name="target.dir" value="${basedir}/target" />
+	<property name="test.data.dir" value="${basedir}/test.data" />
+	<property name="prod.data.dir" value="${basedir}/prod.data" />
+	<property name="M2_REPO" value="${M2_REPO}" />
+
+	<condition property="is.test">
+		<and>
+			<isset property="is.prod.env" />
+			<equals arg1="${is.prod.env}" arg2="false" />
+		</and>
+	</condition>
+
+	<tstamp>
+		<format property="date.stamp" pattern="yyyy/MM/dd hh:mm:ss" />
+	</tstamp>
+
+	<path id="classpath">
+		<fileset dir="${M2_REPO}" casesensitive="false">
+			<include name="postgresql/postgresql/8.4-701.jdbc4/*.jar" />
+			<include name="org/liquibase/liquibase-core/1.9.5/*.jar" />
+			<include name="ant-contrib/ant-contrib/1.0b3/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef resource="migratortasks.properties">
+		<classpath refid="classpath" />
+	</taskdef>
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath refid="classpath" />
+	</taskdef>
+
+	<target name="1.about" description="Show the project help info.">
+		<echo message="${date.stamp}" />
+		<echo message="This is ${app.name} dbmigration." />
+		<echo message="For postgres: 1.creat db, 2.creat-role/user, 3.create schema(ower-role)." />
+		<echo message="Database infos: " />
+		<echo message="jdbc.driver=${jdbc.driver}" />
+		<echo message="jdbc.url=${jdbc.url}" />
+		<echo message="super.name=${super.name}" />
+		<echo message="super.password=${super.password}" />
+		<echo message="username=${username}" />
+		<echo message="password=${password}" />
+	</target>
+
+	<target name="2.clean" depends="1.about" description="Clean build infos.">
+		<delete dir="${target.dir}" includeemptydirs="true" />
+	</target>
+
+	<target name="copy.script">
+		<mkdir dir="${target.dir}" />
+		<mkdir dir="${target.dir}/test.data" />
+		<mkdir dir="${target.dir}/prod.data" />
+		<filter token="schema" value="${username}" />
+		<filter token="target.dir" value="${target.dir}" />
+		<copy todir="${target.dir}/prod.data" filtering="true" encoding="UTF8" outputencoding="UTF8" overwrite="true">
+			<fileset dir="${prod.data.dir}" includes="**/*" />
+		</copy>
+		<copy todir="${target.dir}/test.data" filtering="true" encoding="UTF8" outputencoding="UTF8" overwrite="true">
+			<fileset dir="${test.data.dir}" includes="**/*" />
+		</copy>
+	</target>
+
+	<target name="3.prepare" depends="2.clean,copy.script" description="Clean and copy scripts." />
+
+	<target name="4.init.db" depends="3.prepare" description="Init db.">
+		<fail unless="is.test" message="ERROR! ${line.separator}WARM: This is product envoriment, mustn't do this target!!!!" />
+		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${super.name}" password="${super.password}" classpathref="classpath" encoding="UTF-8">
+			<fileset dir="${target.dir}/prod.data/init.db" casesensitive="false">
+				<!-- tips: sql scripts will be execute order by file name -->
+				<include name="rebuild_schema.sql" />
+				<include name="remove_liquibase_log_tables.sql" />
+			</fileset>
+		</sql>
+	</target>
+
+	<target name="5.rebuild.schema" depends="4.init.db" description="Rebuild schema">
+		<migrateDb script.dir="${target.dir}/prod.data/rel1" dropfirst="false" />
+		<migrateDb script.dir="${target.dir}/prod.data/rel2" dropfirst="false" />
+	</target>
+
+	<target name="8.upgrade.db" depends="3.prepare" description="Update database.">
+		<echo message="upgrade database." />
+		<migrateDb script.dir="${target.dir}/prod.data/rel2" dropfirst="false" />
+	</target>
+
+
+	<target name="6.refresh.test.data" depends="5.rebuild.schema" description="Rebuild schema and refresh test data.">
+		<echo message="add test data ...." />
+		<migrateDb script.dir="${target.dir}/test.data" dropfirst="false" />
+	</target>
+
+	<target name="7.refresh.prod.data" depends="5.rebuild.schema" description="Rebuild schema and refresh prod data." />
+
+	<macrodef name="migrateDb">
+		<attribute name="script.dir" />
+		<!-- dropFirst do not work with schema -->
+		<attribute name="dropFirst" default="false" />
+		<sequential>
+			<echo message="Excute script: @{script.dir}" />
+			<!-- add  outputfile="${report.dir}/liquibase${date.stamp}.sql here can output the sql script file instead of modify db directory -->
+			<migrateDatabase defaultSchemaName="${username}" changeLogFile="@{script.dir}/script_suite.xml" driver="${jdbc.driver}" url="${jdbc.url}" username="${username}" password="${password}" dropFirst="@{dropFirst}" promptOnNonLocalDatabase="${prompt.user.if.not.local.database}" classpathref="classpath" />
+		</sequential>
+	</macrodef>
+</project>

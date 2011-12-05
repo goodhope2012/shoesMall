@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+	<preConditions>
+		<dbms type="postgresql" />
+	</preConditions>
+	<property name="table.name" value="USERS_ROLE" />
+	<changeSet id="1" author="qh">
+		<sql>
+			insert into ${table.name} (username, role_id) values ( 'admin', 1);
+			insert into ${table.name} (username, role_id) values ( 'admin', 2);
+			insert into ${table.name} (username, role_id) values ( 'admin', 3);
+			insert into ${table.name} (username, role_id) values ( 'admin', 4);
+			insert into ${table.name} (username, role_id) values ( 'admin', 5);
+			insert into ${table.name} (username, role_id) values ( 'operator', 1);
+			insert into ${table.name} (username, role_id) values ( 'operator', 2);
+			insert into ${table.name} (username, role_id) values ( 'operator', 3);
+			insert into ${table.name} (username, role_id) values ( 'operator', 4);
+			insert into ${table.name} (username, role_id) values ( 'server', 1);
+			insert into ${table.name} (username, role_id) values ( 'server', 2);
+			insert into ${table.name} (username, role_id) values ( 'server', 3);
+			insert into ${table.name} (username, role_id) values ( 'cooperator', 1);
+			insert into ${table.name} (username, role_id) values ( 'cooperator', 2);
+			insert into ${table.name} (username, role_id) values ( 'test', 1);
+			insert into ${table.name} (username, role_id) values ( 'user1', 1);
+			insert into ${table.name} (username, role_id) values ( 'user2', 1);
+			insert into ${table.name} (username, role_id) values ( 'user3', 1);
+			insert into ${table.name} (username, role_id) values ( 'user4', 1);
+			insert into ${table.name} (username, role_id) values ( 'user5', 1);
+		</sql>
+	</changeSet>
+</databaseChangeLog>
