@@ -6,7 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import com.cocos.share.domain.User;
+import com.shoesMall.dao.UserDAO;
+import com.shoesMall.domain.User;
 
 public class UserDAOTest extends BaseDAOTestCase {
 	@Autowired(required = true)
