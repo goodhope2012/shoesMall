@@ -24,9 +24,9 @@
 			<mvc:mapping path="/**" />
 			<bean class="com.shoesMall.interceptor.DuplicateFormSubmissionInterceptor" />
 		</mvc:interceptor>
-		<!-- mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/cas/register/add" />
 			<bean class="com.shoesMall.interceptor.JcaptchaVerifyInterceptor" />
-		</mvc:interceptor-->
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
